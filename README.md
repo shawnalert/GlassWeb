@@ -10,5 +10,4 @@ A template/starter for a web page/web app with a glassy design.
 4. If needed, customize colors and design in style.css
 5. Type your name in the Site Creator section in settings.html
 6. Configure the manifest.html file.
-7. All done
-Done!
+7. All done!
