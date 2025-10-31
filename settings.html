@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Settings</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
+
+  <body>
+    <!-- Back Button -->
+    <button class="btn" onclick="javascript:history.back()">&#8592 Back</button>
+
+    <!-- Page Title -->
+    <h1>Settings</h1>
+
+    <!-- Dark Mode Toggle -->
+    <div class="glass-grid">
+      <div class="glass-btn" style="max-width: 700px; text-align: center;">
+        <h3>Dark Mode [EXPERIMENTAL] </h3>
+        <div class="switch-container">
+          <label class="switch">
+            <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!--Site Creator-->
+    <div class="glass-grid">
+      <div class="glass-btn" style="max-width: 700px; text-align: left;">
+        <h3>
+          <h1>Site Creator</h1>
+          <t>Not configured</t> <!--Replace this with your name-->
+        </h3>
+      </div>
+      
+      <!--GlassWeb Credit (DO NOT REMOVE OR EDIT, REQUIRED BY LICENSE)-->
+    <div class="glass-grid">
+      <div class="glass-btn" style="max-width: 700px; text-align: left;">
+        <h3>
+          <h1>Based off of GlassWeb</h1>
+          <t>GlassWeb is created by Shawn (GitHub: shawnalert) and is licensed under CC BY-SA 4.0</t>
+          <a href="https://github.com/shawnalert/GlassWeb" target="_blank">
+        <button class="glass-btn">Open Github project page</button>
+      </a>
+        </h3>
+      </div>
+
+    <script>
+      const toggle = document.getElementById("darkToggle");
+
+      // Load saved mode
+      if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+
+      function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+      }
+    </script>
+
+  </body>
+</html>

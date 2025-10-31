@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="theme.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Website</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Your CSS file -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Cache Control -->
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+
+    <style>
+      /* Dropdown container */
+      .dropdown {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+      }
+
+      .dropdown .btn {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        padding: 10px 20px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 10px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        min-width: 160px;
+        overflow: hidden;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+
+      .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      .dropdown.show .dropdown-content {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Dropdown Menu -->
+    <div class="dropdown">
+      <button class="btn" onclick="toggleDropdown()">☰ Menu</button>
+      <div class="dropdown-content" id="dropdownContent">
+        <a href="settings.html">⚙️ Settings</a>
+        <a href="#" onclick="triggerInstall()">📲 Install Web App</a>
+      </div>
+    </div>
+
+    <!-- Page Title -->
+    <h1>Website</h1>
+
+    <!-- Navigation Grid -->
+    <div class="glass-grid">
+      <button class="glass-btn" onclick="location.href='old-entries.html'">📝 Text page</button>
+      <button class="glass-btn" onclick="location.href='social.html'">🌐 Page with external link button</button>
+    </div>
+
+    <!-- Install Prompt + Dropdown Script -->
+    <script>
+      let deferredPrompt;
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      window.addEventListener('appinstalled', () => {
+        deferredPrompt = null;
+        console.log('App was installed');
+      });
+
+      function triggerInstall() {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(({ outcome }) => {
+            if (outcome === 'accepted') {
+              console.log('User accepted the install prompt');
+            } else {
+              console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+          });
+        } else {
+          alert("Install failed. This is probably because your platform doesn't support installing web apps or the manifest file wasn't properly configured by the developer.");
+        }
+      }
+
+      function toggleDropdown() {
+        document.querySelector('.dropdown').classList.toggle('show');
+      }
+
+      window.onclick = function(event) {
+        if (!event.target.closest('.dropdown')) {
+          document.querySelector('.dropdown').classList.remove('show');
+        }
+      };
+    </script>
+  </body>
+</html>

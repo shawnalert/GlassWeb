@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="theme.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page with button</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Cache Control -->
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+
+    <style>
+      /* Popup overlay */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      /* Popup box */
+      .popup-box {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        padding: 30px;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      .popup-box button {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 12px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .confirm-btn {
+        background: rgba(255, 255, 255, 0.25);
+        color: white;
+      }
+
+      .cancel-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Back Button -->
+    <button class="btn" type="button" onclick="javascript:history.back()">&#8592 Back</button>
+
+    <!-- Page Title -->
+    <h1>Page with button</h1>
+
+    <!-- Message and Button -->
+    <div class="glass-grid">
+      <div class="glass-btn" style="max-width: 700px; text-align: left;">
+        <h3>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </h3>
+        <button class="btn" onclick="showPopup()">Open site</button>
+      </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+      <div class="popup-box">
+        <p><strong>Example is a third-party service.</strong><br>Do you want to continue?</p>
+        <button class="confirm-btn" onclick="continueToPage()">Yes, continue</button>
+        <button class="cancel-btn" onclick="hidePopup()">Cancel</button>
+      </div>
+    </div>
+
+    <script>
+      function showPopup() {
+        document.getElementById('popup').style.display = 'flex';
+      }
+
+      function hidePopup() {
+        document.getElementById('popup').style.display = 'none';
+      }
+
+      function continueToPage() {
+        window.location.href = 'https://example.com';
+      }
+    </script>
+  </body>
+</html>
